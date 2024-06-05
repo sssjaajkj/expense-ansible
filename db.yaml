@@ -1,6 +1,8 @@
 - name: configure db server
   hosts: db
   become: yes
+  vars:
+    login_host: db.aws79s.online
   tasks:
   - name: install MYSQL Server
     ansible.builtin.dnf:
