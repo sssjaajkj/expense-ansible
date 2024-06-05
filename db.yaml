@@ -14,8 +14,9 @@
       name: mysqld
       state: started
       enabled: yes
+
   - name: install python mysql dependencies
-    ansible.builtin.service:
+    ansible.builtin.pip:
       name:
       - PyMySQL
       - cryptography
