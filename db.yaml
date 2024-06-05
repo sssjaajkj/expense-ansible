@@ -21,7 +21,7 @@
       login_password: ExpenseApp@1
       login_host: "{{ login_host }}"
       filter: version
-    ignore_error: yes
+    ignore_errors: yes
     register: mysql-connection_output
 
   - name: print output
