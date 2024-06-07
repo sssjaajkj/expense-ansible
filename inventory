@@ -1,2 +1,9 @@
 [db]
 db.aws79s.online
+
+[backend]
+backend.aws79s.online
+
+
+[frontend]
+frontend.aws79s.online
