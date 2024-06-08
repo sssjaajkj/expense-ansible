@@ -1,6 +1,6 @@
 - name: configure backend server
   become: yes
-  hosts: backend
+  hosts: backend 
   vars:
 
 
