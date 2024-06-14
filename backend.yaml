@@ -2,6 +2,8 @@
   become: yes
   hosts: backend 
   vars:
+   login_host: db.aws79s.online
+   login_password: ExpenseApp@1
 
 
   tasks:
@@ -13,8 +15,11 @@
 
   - name: install nodejs
     ansible.builtin.dnf:
-      name: nodejs
+      name: {{ iteam }}
       state: installed
+    loop:
+    - noodjs
+    - mysql  
 
   - name: create expense user
     ansible.builtin.user:
@@ -46,9 +51,33 @@
       src: backend.service
       dest: /etc/systemd/system/backend.service
 
-  - name:      
-    
+    - name: install python mysql dependencies
+      ansible.builtin.pip:
+        name:
+        - PyMySQL
+        - cryptography
+        executable: pip3.9
 
+   - name: import data into mysql
+    community.mysql.mysql_db:
+      login_user: root
+      login_password: "{{ login_password}}"
+      login_host: "{{ login_host }}"   
+      target: /app/schema/backend.sql
+      #state: dump
+      state: import
+      name: all
+
+
+  - name: daemain reload
+   ansible.builtin.systemd_service:
+      daemon_reload: true
+
+  - name: start and enable backend service
+    ansible.builtin.service:
+      name: backend
+      state: started
+      enabled: yes     
 
 
 
