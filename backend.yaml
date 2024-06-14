@@ -36,6 +36,21 @@
     dest: /app
     remote_src: yes
 
+  - name: install npm dependenices
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+
+  - name: copy backend service
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+
+  - name:      
+    
+
+
+
 
 
 
